@@ -7,17 +7,19 @@ import "./App.css"
 const App = () => {
   const [dropDownVisible, setDropDownVisible] = useState(false);
   const options = [
-    "Yes" , "Probably Not"
+     "YES","Probably Not","No"
   ]
   
   const handleHover = () => {
     setDropDownVisible(true)
-    console.log(dropDownVisible);
+    
   }
 
-  const handleOption = ()=>{
-    setDropDownVisible(false)
+  const handleOption = () => {
+    setDropDownVisible(!dropDownVisible)
   }
+
+  console.log(dropDownVisible);
   return (
 		<>
 			<div className="container">
@@ -26,16 +28,22 @@ const App = () => {
 					className="select"
 					onMouseEnter={handleHover}
 				>
-					
-					Select  &nbsp;{dropDownVisible ? <IoIosArrowUp /> : <IoIosArrowDown />}{' '}
+					Select &nbsp;{dropDownVisible ? <IoIosArrowUp /> : <IoIosArrowDown />}{' '}
 				</div>
-				{dropDownVisible && (
-          options.map((option, index) => {
-            return (
-              <button key={index} onClick={handleOption}>{option }</button>
-            )
-          })
-				)}
+				<div className="options">
+					{dropDownVisible &&
+						options.map((option, index) => {
+							return (
+								<div 
+									className="button"
+									key={index}
+									onClick={handleOption}
+								>
+									{option}
+								</div>
+							);
+						})}
+				</div>
 			</div>
 		</>
 	);
